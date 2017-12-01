@@ -23,9 +23,7 @@ public class MasterScene {
     ToggleGroup toggleGroup;
     GuiController guiController;
 
-
-    //Bertram, Jesper
-    public Scene getMasterScene() {
+    public Scene getMasterScene(GuiController guiController) {
 //        Locale.setDefault(Constants.DENMARK);
         this.guiController = guiController;
         vBox        = new VBox();
@@ -61,7 +59,7 @@ public class MasterScene {
         content.setMinWidth(1280);
         content.setMaxWidth(1280);
 
-
+        content.getChildren().add((guiController.calenderContent()));
         tglBtnCalendar.setSelected(true);
 
         //make each button load the appropiate content and disable themselves if they're selected.
@@ -69,7 +67,7 @@ public class MasterScene {
        toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             Toggle selection = toggleGroup.getSelectedToggle();
             if(selection.equals(tglBtnNews)) {
-//                content.getChildren().clear();
+               content.getChildren().clear();
 //                content.getChildren().add(guiController.calendarContent());
                 tglBtnNews.setDisable(true);
             } else {

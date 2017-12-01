@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import presentation.Calender;
 import presentation.LoginScene;
 import presentation.MasterScene;
+import presentation.*;
 
 public class GuiController {
     private Stage primaryStage;
@@ -29,7 +30,7 @@ public class GuiController {
     }
 
     public Scene MasterScene(){
-        return masterScene.getMasterScene();
+        return masterScene.getMasterScene(this);
     }
 
     public HBox calenderContent(){

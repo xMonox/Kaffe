@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import presentation.controller.GuiController;
+import sun.applet.Main;
 import sun.rmi.runtime.Log;
 
 public class Gui extends Application{
@@ -17,7 +18,7 @@ public class Gui extends Application{
             scene = guiController.loginScene();
 //        scene = new LoginScene().getScene(guiController, primaryStage);
         primaryStage = guiController.getPrimaryStage();
-        scene.getStylesheets().add("style.css");
+//        scene.getStylesheets().add(Main.class.getResource("/style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }

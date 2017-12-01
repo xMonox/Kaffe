@@ -13,6 +13,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import presentation.controller.GuiController;
+import sun.applet.Main;
+
+
+import java.nio.file.Paths;
 
 /**
  * Created by Svend B on 27-11-2017.
@@ -85,7 +89,10 @@ public class LoginScene {
 
         btnLogin.requestFocus();
         scene = new Scene(borderPane, 1280, 720);
-        borderPane.getStylesheets().add("presentation/style/style2.css");
+//        String uri = Paths.get("presentation/style/style.css").toUri().toString();
+//        borderPane.getStylesheets().add(uri);
+//        borderPane.getStylesheets().add(Main.class.getResource("/style.css").toExternalForm());
+
         return scene;
 
     }
