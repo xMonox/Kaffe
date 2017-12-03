@@ -101,8 +101,7 @@ public class MasterScene {
             }
         });
 
-//        vBox.getStylesheets().add("presentation/style/style.css");
-//        vBox.getStylesheets().add("presentation/style/style.css");
+        vBox.getStylesheets().add("/style/style.css");
         vBox.getChildren().addAll(hBoxTop, content);
         scene       = new Scene(vBox, 1280, 720);
         return scene;

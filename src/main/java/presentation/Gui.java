@@ -18,7 +18,6 @@ public class Gui extends Application{
             scene = guiController.loginScene();
 //        scene = new LoginScene().getScene(guiController, primaryStage);
         primaryStage = guiController.getPrimaryStage();
-//        scene.getStylesheets().add(Main.class.getResource("/style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }

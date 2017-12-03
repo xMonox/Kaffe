@@ -16,6 +16,7 @@ import presentation.controller.GuiController;
 import sun.applet.Main;
 
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -85,13 +86,13 @@ public class LoginScene {
         vBoxContainer.getChildren().addAll(vBoxLogin);
 
         borderPane.setCenter(vBoxContainer);
-
+        borderPane.getStylesheets().add("/style/style.css");
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+        System.out.println("Current relative path is: " + s);
 
         btnLogin.requestFocus();
-        scene = new Scene(borderPane, 1280, 720);
-//        String uri = Paths.get("presentation/style/style.css").toUri().toString();
-//        borderPane.getStylesheets().add(uri);
-//        borderPane.getStylesheets().add(Main.class.getResource("/style.css").toExternalForm());
+        scene = new Scene(borderPane, 1280, 720);;
 
         return scene;
 
