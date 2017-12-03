@@ -2,19 +2,27 @@ package presentation;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.print.PrinterJob;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import jfxtras.labs.scene.control.CalendarLabel;
+import jfxtras.scene.control.LocalDatePicker;
+import jfxtras.scene.control.agenda.Agenda;
 import presentation.controller.GuiController;
+
+import java.util.Locale;
 
 /**
  * Created by Svend B on 27-11-2017.
  */
 public class Calender {
         Stage primaryStage;
-        HBox hBox, hBoxCalender, hBoxSaveAndCancel, hBoxCombo, hBoxLabelsForCombo;
+        HBox root, hBoxLeft, hBoxRight, hBoxCalender, hBoxSaveAndCancel, hBoxCombo, hBoxLabelsForCombo;
+        GridPane gridPane;
         VBox vBox, vBoxChreateShift;
         GuiController guiController;
         Label lblUserId, lblDatePickerStart, lblDatePickerEnd, lblStartShift, lblEndShift;
@@ -25,9 +33,37 @@ public class Calender {
 
 
     public HBox getCalender(GuiController guiController, Stage primaryStage ){
-        this.guiController   = guiController;
-        this.primaryStage    = primaryStage;
-        hBox                 = new HBox();
+        this.guiController  = guiController;
+        this.primaryStage   = primaryStage;
+        this.root           = new HBox();
+
+        this.hBoxLeft            = new HBox();
+        this.hBoxRight           = new HBox();
+
+        hBoxLeft.setMinWidth(960);
+        hBoxLeft.setMaxHeight(560);
+        hBoxRight.setMinWidth(320);
+
+
+        Agenda agenda = new Agenda().withLocale(Locale.GERMAN);
+        hBoxLeft.getChildren().add(agenda.withLocale(Locale.GERMAN));
+        agenda.setMinWidth(960);
+        agenda.setMinHeight(560);
+
+        agenda.localeProperty().setValue(Locale.GERMAN);
+
+        root.getChildren().addAll(hBoxLeft, hBoxRight);
+
+
+        return root;
+    }
+
+    public void btnCreateShiftClicked() {
+
+
+    }
+    public void SvendB() {
+        /*hBox                 = new HBox();
         hBoxSaveAndCancel    = new HBox();
         hBoxCalender         = new HBox();
         vBox                 = new VBox();
@@ -77,16 +113,7 @@ public class Calender {
         hBox.setPadding(new Insets(50));
 
 
-        btnCreateShift.setOnAction(event -> btnCreateShiftClicked());
-
-
-
-     return hBox;
-    }
-
-    public void btnCreateShiftClicked() {
-
-
+        btnCreateShift.setOnAction(event -> btnCreateShiftClicked());*/
     }
 
 }
