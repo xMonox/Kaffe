@@ -25,7 +25,7 @@
 }
 
 .text-field {
-    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+   -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
 }
 .text-field:focused {
     -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
