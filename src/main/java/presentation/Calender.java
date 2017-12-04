@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import jfxtras.labs.scene.control.CalendarLabel;
 import jfxtras.scene.control.LocalDatePicker;
 import jfxtras.scene.control.agenda.Agenda;
+import logic.Controller;
+import logic.entity.Shift;
 import presentation.controller.GuiController;
 
 import java.time.LocalDate;
@@ -35,6 +37,9 @@ public class Calender {
         Agenda agenda;
 
     public HBox getCalender(GuiController guiController, Stage primaryStage ){
+        Controller controller = new Controller();
+        Shift shift = controller.createShift(1, LocalDateTime.now(), LocalDateTime.now().plusHours(1));
+        System.out.println(shift);
         this.guiController  = guiController;
         this.primaryStage   = primaryStage;
         this.root           = new HBox();
