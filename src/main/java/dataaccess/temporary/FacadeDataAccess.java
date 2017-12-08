@@ -39,6 +39,7 @@ public class FacadeDataAccess implements IDataAccessFacade {
         employees.add(new Employee(2, "bartender@psbar.dk", "plain", "Svend", "B", "44448888", bartenderRoles));
 
         Shift shift1 = new Shift(0, LocalDateTime.now().withHour(15).withMinute(0), LocalDateTime.now().withHour(18).withMinute(0), employees.get(1));
+        shifts.add(shift1);
         shiftId = 1;
     }
 
@@ -59,6 +60,11 @@ public class FacadeDataAccess implements IDataAccessFacade {
     @Override
     public Shift getShift() {
         return null;
+    }
+
+    @Override
+    public List<Shift> getShifts() {
+        return shifts;
     }
 
     @Override

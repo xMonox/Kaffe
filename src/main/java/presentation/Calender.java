@@ -18,6 +18,7 @@ import presentation.controller.GuiController;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -25,6 +26,7 @@ import java.util.Locale;
  */
 public class Calender {
         Stage primaryStage;
+        Controller controller;
         HBox root, hBoxLeft, hBoxRight, hBoxCalender, hBoxSaveAndCancel, hBoxCombo, hBoxLabelsForCombo;
         GridPane gridPane;
         VBox vBox, vBoxChreateShift;
@@ -35,10 +37,12 @@ public class Calender {
         DatePicker datePicker1, datePicker2;
         ComboBox comboBox1, comboBox2;
         Agenda agenda;
+        List <Shift> shifts;
 
     public HBox getCalender(GuiController guiController, Stage primaryStage ){
-        Controller controller = new Controller();
+        controller = new Controller();
         Shift shift = controller.createShift(1, LocalDateTime.now(), LocalDateTime.now().plusHours(1));
+        shifts = controller.getShifts();
         System.out.println(shift);
         this.guiController  = guiController;
         this.primaryStage   = primaryStage;
@@ -56,9 +60,9 @@ public class Calender {
         datePicker2          = new DatePicker();
 
         comboBox1             = new ComboBox();
-        comboBox1.getItems().addAll("01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09,00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00");
+        comboBox1.getItems().addAll("01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00");
         comboBox2             = new ComboBox();
-        comboBox2.getItems().addAll("01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09,00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00");
+        comboBox2.getItems().addAll("01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00");
 
         btnCreateShift       = new Button("Opret vagt");
         btnDeleteShift       = new Button("Slet vagt");
@@ -86,14 +90,15 @@ public class Calender {
         hBoxCalender.setSpacing(20);
 
 
-         agenda = new Agenda().withLocale(Locale.GERMAN);
-         agenda.allowDraggingProperty().setValue(false);
-//        hBoxLeft.getChildren().add(agenda.withLocale(Locale.GERMAN));
-        agenda.appointments().addAll(new Agenda.AppointmentImplLocal()
-                .withStartLocalDateTime(LocalDate.now().atTime(12,00))
-                .withEndLocalDateTime(LocalDate.now().atTime(15,00))
-                .withSummary("Julles vagt")
-        );
+        agenda = new Agenda().withLocale(Locale.GERMAN);
+        agenda.allowDraggingProperty().setValue(false);
+        hBoxLeft.getChildren().add(agenda.withLocale(Locale.GERMAN));
+        for (int i = 0; i < shifts.size()-1; i++) {
+            agenda.appointments().addAll(new Agenda.AppointmentImplLocal()
+                .withStartLocalDateTime(shifts.get(i).getStart())
+                .withEndLocalDateTime(shifts.get(i).getEnd())
+                .withSummary(shifts.get(i).toString()));
+        }
 
 
         agenda.setMinWidth(960);
@@ -128,15 +133,21 @@ public class Calender {
     }
 
     public void btnSaveClicked() {
+        Shift shift = controller.createShift(
+                Integer.parseInt(txtUserId.getText()),
+                datePicker1.getValue().atTime(
+                        Integer.parseInt(
+                                comboBox1.getSelectionModel().getSelectedItem().toString().split(":")[0]), 00),
+                datePicker2.getValue().atTime(
+                        Integer.parseInt(
+                                comboBox2.getSelectionModel().getSelectedItem().toString().split(":")[0]), 00)
+        );
 
-      agenda.appointments().addAll(new Agenda.AppointmentImplLocal()
-              .withStartLocalDateTime((datePicker1.getValue()).atTime(Integer.parseInt(comboBox1.getSelectionModel().getSelectedItem().toString().split(":")[0]), 00))
-                .withEndLocalDateTime((datePicker2.getValue()).atTime(Integer.parseInt(comboBox2.getSelectionModel().getSelectedItem().toString().split(":")[0]), 00))
-
-               .withDescription("Julles vagt")
-
-       );
-
+        agenda.appointments().addAll(new Agenda.AppointmentImplLocal()
+                .withStartLocalDateTime(shift.getStart())
+                .withEndLocalDateTime(shift.getEnd())
+                .withSummary(shift.toString())
+        );
 
     }
       /*  public HBox hBoxRight() {
